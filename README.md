@@ -1,0 +1,3 @@
+## BuyBuddy
+
+A shopping project.
