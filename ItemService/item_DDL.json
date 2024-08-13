@@ -1,0 +1,84 @@
+use BuyBuddy;
+
+db.Items.insertMany([
+    {
+        name: "Banana",
+        price: 0.99,
+        description: "Fresh banana",
+        upc: "111111",
+        imageURL: "http://example.com/banana.jpg",
+        inventory: 150
+    },
+    {
+        name: "Apple",
+        price: 1.49,
+        description: "Juicy apple",
+        upc: "222222",
+        imageURL: "http://example.com/apple.jpg",
+        inventory: 200
+    },
+    {
+        name: "Book",
+        price: 12.99,
+        description: "Interesting book",
+        upc: "333333",
+        imageURL: "http://example.com/book.jpg",
+        inventory: 100
+    },
+    {
+        name: "Laptop",
+        price: 999.99,
+        description: "Powerful laptop",
+        upc: "444444",
+        imageURL: "http://example.com/laptop.jpg",
+        inventory: 50
+    },
+    {
+        name: "Chair",
+        price: 49.99,
+        description: "Comfortable chair",
+        upc: "555555",
+        imageURL: "http://example.com/chair.jpg",
+        inventory: 120
+    },
+    {
+        name: "Table",
+        price: 89.99,
+        description: "Sturdy table",
+        upc: "666666",
+        imageURL: "http://example.com/table.jpg",
+        inventory: 75
+    },
+    {
+        name: "Headphones",
+        price: 29.99,
+        description: "Noise-cancelling headphones",
+        upc: "777777",
+        imageURL: "http://example.com/headphones.jpg",
+        inventory: 300
+    },
+    {
+        name: "Coffee Mug",
+        price: 7.99,
+        description: "Ceramic coffee mug",
+        upc: "888888",
+        imageURL: "http://example.com/coffeemug.jpg",
+        inventory: 250
+    },
+    {
+        name: "T-shirt",
+        price: 19.99,
+        description: "Comfortable T-shirt",
+        upc: "999999",
+        imageURL: "http://example.com/tshirt.jpg",
+        inventory: 180
+    },
+    {
+        name: "Water Bottle",
+        price: 14.99,
+        description: "Reusable water bottle",
+        upc: "000000",
+        imageURL: "http://example.com/waterbottle.jpg",
+        inventory: 220
+    }
+]);
