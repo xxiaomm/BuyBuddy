@@ -3,10 +3,10 @@ package com.example.itemservice.controller;
 import com.example.itemservice.common.Response;
 import com.example.itemservice.entity.Item;
 import com.example.itemservice.service.ItemService;
-import org.bson.types.ObjectId;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +18,8 @@ import java.util.Optional;
  * @Author xiao
  * @Description
  */
-//@Api(value = "Item Controller", description = "APIs related to Item Management")
+
+@Api(value = "item-controller") // description = "", tag = {"",""}
 @RestController
 @RequestMapping("/items")
 public class ItemController {
@@ -26,6 +27,7 @@ public class ItemController {
     ItemService itemService;
 
 
+    @ApiOperation(value = "Create Item REST API")
     @PostMapping
     public ResponseEntity<Response<Item>> createItem(@RequestBody Item itemDetails) {
         Item createdItem = itemService.createItem(itemDetails);
@@ -33,7 +35,7 @@ public class ItemController {
         return ResponseEntity.ok(response);
     }
 
-
+    @ApiOperation(value = "Update Item REST API")
     @PutMapping("/{id}")
     public ResponseEntity<Response<Item>> updateItem(@PathVariable String id, @RequestBody Item itemDetails) {
         Optional<Item> updatedItem = itemService.updateItem(id, itemDetails);
@@ -46,6 +48,7 @@ public class ItemController {
         }
     }
 
+    @ApiOperation(value = "Delete Item with Id REST API")
     @DeleteMapping("/{id}")
     public ResponseEntity<Response<Item>> deleteItemById(@PathVariable String id) {
         Optional<Item> deletedItem = itemService.deleteItemById(id);
@@ -71,6 +74,7 @@ public class ItemController {
 //        }
 //    }
 
+    @ApiOperation(value = "Get Item with Id REST API")
     @GetMapping("/{id}") // , produces = MediaType.APPLICATION_JSON_VALUE
     public ResponseEntity<Response<Item>> getItemById(@PathVariable String id) {
 //        ObjectId objectId = new ObjectId(id);
@@ -84,6 +88,7 @@ public class ItemController {
         }
     }
 
+    @ApiOperation(value = "Get All Items REST API")
     @GetMapping
     public ResponseEntity<Response<List<Item>>> getAllItems() {
         List<Item> items = itemService.getAllItems();
@@ -91,6 +96,7 @@ public class ItemController {
         return ResponseEntity.ok(response);
     }
 
+    @ApiOperation(value = "Get Inventory of an Item REST API")
     @GetMapping("/{id}/inventory")
     public ResponseEntity<Response<Integer>> getInventory(@PathVariable String id) {
         int inventory = itemService.getInventory(id);
@@ -98,6 +104,7 @@ public class ItemController {
         return ResponseEntity.ok(response);
     }
 
+    @ApiOperation(value = "Update Inventory of an Item REST API")
     @PutMapping("/{id}/inventory")
     public ResponseEntity<Response<Integer>> updateInventory(@PathVariable String id, @RequestParam int soldAmount) {
         int updatedInventory = itemService.updateInventory(id, soldAmount);
