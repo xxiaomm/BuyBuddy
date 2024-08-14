@@ -18,6 +18,6 @@ public interface PaymentService {
 
 //    Long doPayment(String orderId); // paymentId
 
-    Optional<Payment> refund(String orderId);
+    Optional<Payment> reversePayment(String orderId);
     Optional<Payment> searchPayment(String orderId);
 }

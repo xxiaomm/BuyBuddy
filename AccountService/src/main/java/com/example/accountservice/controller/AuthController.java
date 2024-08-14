@@ -6,6 +6,8 @@ import com.example.accountservice.entity.User;
 import com.example.accountservice.repository.RoleRepository;
 import com.example.accountservice.repository.UserRepository;
 import com.example.accountservice.security.JwtTokenProvider;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,8 @@ import java.util.Collections;
  * @Author xiao
  * @Description
  */
+
+@Api(value = "auth-controller")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -51,6 +55,7 @@ public class AuthController {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
+    @ApiOperation(value = "Register User REST API")
     @PostMapping("/signup")
     public ResponseEntity<?> register(@RequestBody SignUpDto signUpDto) {
         logger.info("New User is trying to sign up our application");
@@ -90,6 +95,7 @@ public class AuthController {
     }
 
 
+    @ApiOperation(value = "Login REST API")
     @PostMapping("/login")
     public ResponseEntity<JwtLoginResponse> authenticateUser(@RequestBody LoginDto loginDto) {
         logger.info(loginDto.getUsernameOrEmail() + " is trying to sign in our application");

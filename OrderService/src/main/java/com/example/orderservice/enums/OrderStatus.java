@@ -1,4 +1,4 @@
-package com.example.orderservice.constant;
+package com.example.orderservice.enums;
 
 /**
  * @Create 08/2024
@@ -10,5 +10,5 @@ public enum OrderStatus {
     CREATE,
     PAID,
     COMPLETED,
-    CANCEL
+    CANCELLED
 }

@@ -1,4 +1,4 @@
-package com.example.itemservice.config;
+package com.example.paymentservice.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +24,7 @@ public class SwaggerConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
             .select()
-            .apis(RequestHandlerSelectors.basePackage("com.example.itemservice.controller"))
+            .apis(RequestHandlerSelectors.basePackage("com.example.paymentservice.controller"))
             .paths(PathSelectors.any())
             .build()
             .apiInfo(apiInfo());
@@ -32,21 +32,10 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-            .title("Item Service REST APIs")
-            .description("API documentation for Item Service of BuyBuddy")
-//            .termsOfServiceUrl("https://blog.csdn.net/qq_41973594")
-//            .contact(new Contact("Java鱼仔","https://blog.csdn.net/qq_41973594","974474148@qq.com"))
+            .title("Payment Service REST APIs")
+            .description("API documentation for Payment Service of BuyBuddy")
             .version("1.0")
             .build();
-//        return new ApiInfo(
-//            "RedBook REST APIs",
-//            "RedBook REST API Documentation",
-//            "1",
-//            "Terms of service",
-//            new Contact("Chuwa", "www.chuwaamerica.com", "contactus@chuwaamerica.com"),
-//            "License of API",
-//            "API license URL",
-//            Collections.emptyList()
-//        );
+
     }
 }

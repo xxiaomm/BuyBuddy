@@ -89,11 +89,25 @@
             <artifactId>spring-boot-starter-validation</artifactId>
 <!--            <version>3.3.2</version>-->
         </dependency>
+
+<!--   Swagger: 如果你使用 springfox-boot-starter，那么你不再需要单独引入 springfox-swagger2 和 springfox-swagger-ui，因为 boot-starter
+已经包含并自动配置了这些依赖。-->
         <dependency>
             <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
+            <artifactId>springfox-boot-starter</artifactId>
             <version>3.0.0</version>
         </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>io.springfox</groupId>-->
+<!--            <artifactId>springfox-swagger2</artifactId>-->
+<!--            <version>3.0.0</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.springfox</groupId>-->
+<!--            <artifactId>springfox-swagger-ui</artifactId>-->
+<!--            <version>3.0.0</version>-->
+<!--        </dependency>-->
 
     </dependencies>
 

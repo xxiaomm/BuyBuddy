@@ -1,7 +1,7 @@
 package com.example.orderservice.entity;
 
 import com.example.itemservice.entity.Item;
-import com.example.orderservice.constant.OrderStatus;
+import com.example.orderservice.enums.OrderStatus;
 import org.springframework.data.cassandra.core.mapping.CassandraType;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;

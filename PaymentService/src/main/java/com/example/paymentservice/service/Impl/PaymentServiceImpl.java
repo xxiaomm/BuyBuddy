@@ -25,7 +25,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public Optional<Payment> refund(String orderId) {
+    public Optional<Payment> reversePayment(String orderId) {
         return null;
     }
 
