@@ -1,6 +1,9 @@
 package com.example.itemservice.service;
 
+import com.example.itemservice.dto.ItemDto;
 import com.example.itemservice.entity.Item;
+import com.example.itemservice.enums.InventoryOperation;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,19 +18,19 @@ import java.util.Optional;
 @Service
 public interface ItemService {
 
-    Optional<Item> getItemById(String id);
+    Optional<ItemDto> getItemById(String id);
 
-    Item createItem(Item item);
+    ItemDto createItem(ItemDto itemDto);
 
-    Optional<Item> updateItem(String id, Item itemDetails);
+    Optional<ItemDto> updateItem(String id, ItemDto itemDetails);
 
-    Optional<Item> deleteItemById(String id);
+    Optional<ItemDto> deleteItemById(String id);
 
-    List<Item> getAllItems();
+    List<ItemDto> getAllItems();
 
 
     int getInventory(String id);
-    int updateInventory(String id, int soldAmount);
+    int updateInventory(String id, int amount, InventoryOperation operation);
 
 
 }
