@@ -11,3 +11,7 @@
     "inventory": 55
 }
 ```
+
+![img.png](images/swagger%20dependency%20bug.png)
+//@EnableSwagger2 -> bug: Type javax.servlet.http.HttpServletRequest not present
+
