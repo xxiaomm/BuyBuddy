@@ -17,7 +17,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 
 @Configuration
-@EnableSwagger2
+//@EnableSwagger2 //-> bug: Type javax.servlet.http.HttpServletRequest not present
 public class SwaggerConfig {
 
     @Bean

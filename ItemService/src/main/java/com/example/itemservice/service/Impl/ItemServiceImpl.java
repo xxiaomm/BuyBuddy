@@ -60,6 +60,7 @@ public class ItemServiceImpl implements ItemService {
             item.get().setDescription(itemDetails.getDescription());
             item.get().setInventory(itemDetails.getInventory());
             item.get().setImageURL(itemDetails.getImageURL());
+            itemRepository.save(item.get());
 //            item.get().setUpc(itemDetails.getUpc());
         } else {
             logger.info("No such item with id: "+ id);
