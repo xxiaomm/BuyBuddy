@@ -1,6 +1,5 @@
 package com.example.orderservice.entity;
 
-import com.example.itemservice.entity.Item;
 import com.example.orderservice.enums.OrderStatus;
 import io.swagger.annotations.ApiModel;
 import lombok.*;
@@ -41,7 +40,7 @@ public class Order {
 
     @Column("items")
     @CassandraType(type = CassandraType.Name.LIST, typeArguments = CassandraType.Name.UDT)// UserDefineType
-    private List<Item> items;
+    private List<OrderItem> items;
 
     @Column("shipping_address")
     private String shippingAddress;

@@ -10,6 +10,8 @@ import com.example.orderservice.enums.OrderStatus;
 import com.example.orderservice.mapper.OrderMapper;
 import com.example.orderservice.repository.OrderRepository;
 import com.example.orderservice.service.OrderService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -43,6 +45,8 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private ItemService itemService; // Inject ItemService
 
+    private static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
+
 
     /**
      * TODO: check inventory from item-service
@@ -60,6 +64,8 @@ public class OrderServiceImpl implements OrderService {
         order.setTotalPrice(totalPrice);
 
         Order savedOrder = orderRepository.save(order);
+
+        logger.info(order.toString());
 
         // Publish order creation event to Kafka
 //        kafkaTemplate.send("order-topic", savedOrder);

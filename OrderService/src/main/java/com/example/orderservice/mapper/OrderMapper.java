@@ -2,6 +2,7 @@ package com.example.orderservice.mapper;
 
 import com.example.orderservice.dto.OrderDto;
 import com.example.orderservice.entity.Order;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,6 +14,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderMapper {
 
+    @Autowired
+    private OrderItemMapper orderItemMapper;
+
     // convert Order to OrderDto
     public OrderDto toOrderDto(Order order) {
         if (order == null) return null;
@@ -23,7 +27,7 @@ public class OrderMapper {
         orderDto.setPaymentMethod(order.getPaymentMethod());
         orderDto.setBillingAddress(order.getBillingAddress());
         orderDto.setShippingAddress(order.getShippingAddress());
-//        orderDto.setItems(order.getItems());
+        orderDto.setItems(orderItemMapper.toOrderItemDtoList(order.getItems()));
 
         return orderDto;
     }
@@ -38,7 +42,7 @@ public class OrderMapper {
         order.setPaymentMethod(orderDto.getPaymentMethod());
         order.setBillingAddress(orderDto.getBillingAddress());
         order.setShippingAddress(orderDto.getShippingAddress());
-//        order.setItems(orderDto.getItems());
+        order.setItems(orderItemMapper.toOrderItemList(orderDto.getItems()));
 
         return order;
     }

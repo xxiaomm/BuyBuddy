@@ -23,7 +23,6 @@ import java.util.UUID;
 @ApiModel(value = "OrderDto")
 public class OrderDto {
 
-
     private String userId;
     private OrderStatus orderStatus;
     private String paymentMethod;

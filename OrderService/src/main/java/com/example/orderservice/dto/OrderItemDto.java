@@ -17,6 +17,6 @@ import lombok.NoArgsConstructor;
 @ApiModel(value = "Order Item Dto")
 public class OrderItemDto {
     private String itemId;
-    private int price;
+    private int price;  // Item.price may be changed
     private int quantity;
 }

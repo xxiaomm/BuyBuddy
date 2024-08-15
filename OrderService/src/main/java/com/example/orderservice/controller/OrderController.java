@@ -60,7 +60,7 @@ public class OrderController {
     }
 
     @ApiOperation(value = "Update Order Status REST API")
-    @PutMapping("/{id}")
+    @PutMapping("/{id}/order_status")
     public ResponseEntity<?> updateOrderStatus(@PathVariable String id, @PathVariable String orderStatus) {
         UUID uuid = UUID.fromString(id);
         OrderStatus status = OrderStatus.valueOf(orderStatus.toUpperCase());
@@ -69,7 +69,7 @@ public class OrderController {
     }
 
     @ApiOperation(value = "Update Order shipping address REST API")
-    @PutMapping("/{id}")
+    @PutMapping("/{id}/shipping_address")
     public ResponseEntity<?> updateShippingAddress(@PathVariable String id, @PathVariable String shippingAddress) {
         UUID uuid = UUID.fromString(id);
         Optional<OrderDto> orderDto = orderService.updateShippingAddress(uuid, shippingAddress);
@@ -77,7 +77,7 @@ public class OrderController {
     }
 
     @ApiOperation(value = "Update Order billing address REST API")
-    @PutMapping("/{id}")
+    @PutMapping("/{id}/billing_address")
     public ResponseEntity<?> updateBillingAddress(@PathVariable String id, @PathVariable String billingAddress) {
         UUID uuid = UUID.fromString(id);
         Optional<OrderDto> orderDto = orderService.updateBillingAddress(uuid, billingAddress);
