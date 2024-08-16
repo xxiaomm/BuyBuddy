@@ -1,4 +1,4 @@
-package com.example.paymentservice.enums;
+package com.example.orderservice.enums;
 
 /**
  * @Create 08/2024
@@ -11,6 +11,7 @@ public enum PaymentMethod {
     PAYPAL,
     DEBIT_CARD,
     CREDIT_CARD,
-    APPLE_PAY
+    APPLE_PAY,
+    UNKNOWN
 
 }

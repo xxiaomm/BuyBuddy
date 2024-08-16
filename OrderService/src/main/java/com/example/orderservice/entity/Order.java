@@ -1,10 +1,13 @@
 package com.example.orderservice.entity;
 
+import com.datastax.oss.driver.api.core.uuid.Uuids;
 import com.example.orderservice.enums.OrderStatus;
+import com.example.orderservice.enums.PaymentMethod;
 import io.swagger.annotations.ApiModel;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.cassandra.core.mapping.CassandraType;
 import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
@@ -23,14 +26,14 @@ import java.util.UUID;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @ApiModel(value = "Order Entity")
 @Table("orders")
 public class Order {
     @PrimaryKey
     private UUID id;
 
-    private String userId;
+    @Column("user_id")
+    private UUID userId;
 
     @Column("total_price")
     private double totalPrice;
@@ -38,9 +41,14 @@ public class Order {
     @Column("order_status")
     private OrderStatus orderStatus;
 
-    @Column("items")
-    @CassandraType(type = CassandraType.Name.LIST, typeArguments = CassandraType.Name.UDT)// UserDefineType
-    private List<OrderItem> items;
+//    @ElementCollection
+//    @Column("items")
+//    @CassandraType(type = CassandraType.Name.LIST, typeArguments = CassandraType.Name.UDT)// UserDefineType
+//    private List<OrderItem> items;
+
+    @Transient
+    private List<OrderItem> orderItems; // 暂存订单项
+
 
     @Column("shipping_address")
     private String shippingAddress;
@@ -49,7 +57,7 @@ public class Order {
     private String billingAddress;
 
     @Column("payment_method")
-    private String paymentMethod;
+    private PaymentMethod paymentMethod;
 
     @CreatedDate
     @Column("create_time")
@@ -61,9 +69,9 @@ public class Order {
     @CassandraType(type = CassandraType.Name.TIMESTAMP)
     private Instant updateTime;
 
-//    public Order() {
-//        this.id = Uuids.timeBased(); // 使用时间戳生成 UUID
-//    }
+    public Order() {
+        this.id = Uuids.timeBased(); // 使用时间戳生成 UUID
+    }
 
 
 }

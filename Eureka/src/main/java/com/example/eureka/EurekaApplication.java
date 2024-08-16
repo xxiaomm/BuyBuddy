@@ -1,18 +1,16 @@
-package com.example.itemservice;
+package com.example.eureka;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-//import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 
 @EnableEurekaServer
-//@EnableDiscoveryClient  // 启用 Eureka Client
 @SpringBootApplication
-public class ItemServiceApplication {
+public class EurekaApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ItemServiceApplication.class, args);
+        SpringApplication.run(EurekaApplication.class, args);
     }
 
 }

@@ -10,6 +10,7 @@
         <module name="ItemService" />
         <module name="OrderService" />
         <module name="AccountService" />
+        <module name="Eureka" />
         <module name="PaymentService" />
       </profile>
     </annotationProcessing>
@@ -17,6 +18,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="AccountService" options="-parameters" />
+      <module name="Eureka" options="-parameters" />
       <module name="ItemService" options="-parameters" />
       <module name="OrderService" options="-parameters" />
       <module name="PaymentService" options="-parameters" />

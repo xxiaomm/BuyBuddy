@@ -21,7 +21,7 @@ public class OrderItemMapper {
     public OrderItemDto toOrderItemDto(OrderItem orderItem) {
         if (orderItem == null) return null;
         OrderItemDto orderItemDto = new OrderItemDto();
-        orderItemDto.setItemId(orderItem.getItemId());
+        orderItemDto.setItemId(orderItem.getItemId().toString());
         orderItemDto.setPrice(orderItem.getPrice());
         orderItemDto.setQuantity(orderItem.getQuantity());
 
@@ -32,7 +32,7 @@ public class OrderItemMapper {
     public OrderItem toOrderItem(OrderItemDto orderItemDto) {
         if (orderItemDto == null) return null;
         OrderItem orderItem = new OrderItem();
-        orderItem.setItemId(orderItemDto.getItemId());
+//        OrderItemKey key = new OrderItemKey(orderId, UUID.fromString(itemDto.getItemId()));
         orderItem.setPrice(orderItemDto.getPrice());
         orderItem.setQuantity(orderItemDto.getQuantity());
 
@@ -41,7 +41,7 @@ public class OrderItemMapper {
 
     // Convert List<OrderItem> to List<OrderItemDto>
     public List<OrderItemDto> toOrderItemDtoList(List<OrderItem> orderItemList) {
-        if (orderItemList == null) return null;
+        if (orderItemList.size() == 0) return null;
         return orderItemList.stream()
             .map(this::toOrderItemDto)
             .collect(Collectors.toList());
