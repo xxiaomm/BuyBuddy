@@ -1,0 +1,25 @@
+{
+  "userId": "12234",
+
+  "items": [
+    {
+      "itemId":"apple",
+      "price": 15,
+      "quantity": 3
+    },
+    {
+      "itemId":"banana",
+      "price": 5,
+      "quantity": 10
+    },
+    {
+      "itemId":"laptop",
+      "price": 1,
+      "quantity": 500
+    }
+  ],
+  "orderStatus": "",
+  "paymentMethod":"",
+  "shippingAddress": "",
+  "billingAddress": ""
+}
