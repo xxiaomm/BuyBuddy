@@ -1,6 +1,11 @@
 package com.example.paymentservice.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.UUID;
 
 /**
  * @Create 08/2024
@@ -8,11 +13,14 @@ import jakarta.persistence.*;
  * @Description
  */
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity(name = "Transactions")
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private UUID id;
 
     @Column(nullable = false)
     private String orderId;
@@ -21,42 +29,11 @@ public class Payment {
     private double amount;
 
     @Column(nullable = false)
-    private String paymentStatus; // e.g., "SUBMITTED", "COMPLETED", "REFUNDED"
+    private String paymentStatus;
 
 //    private LocalDateTime createdAt;
 //
 //    private LocalDateTime updatedAt;
 
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-    public String getPaymentStatus() {
-        return paymentStatus;
-    }
-
-    public void setPaymentStatus(String paymentStatus) {
-        this.paymentStatus = paymentStatus;
-    }
 }

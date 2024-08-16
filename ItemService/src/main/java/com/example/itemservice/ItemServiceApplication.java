@@ -3,10 +3,10 @@ package com.example.itemservice;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 //import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+//import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 
-@EnableEurekaServer
+//@EnableEurekaServer
 //@EnableDiscoveryClient  // 启用 Eureka Client
 @SpringBootApplication
 public class ItemServiceApplication {

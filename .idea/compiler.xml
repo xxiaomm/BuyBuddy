@@ -14,6 +14,9 @@
         <module name="PaymentService" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="kafka-server" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
@@ -22,6 +25,7 @@
       <module name="ItemService" options="-parameters" />
       <module name="OrderService" options="-parameters" />
       <module name="PaymentService" options="-parameters" />
+      <module name="kafka-server" options="-parameters" />
     </option>
   </component>
 </project>

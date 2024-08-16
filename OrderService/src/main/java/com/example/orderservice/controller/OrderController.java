@@ -2,12 +2,13 @@ package com.example.orderservice.controller;
 
 import com.example.orderservice.dto.OrderDto;
 import com.example.orderservice.dto.OrderItemDto;
-import com.example.orderservice.entity.OrderItem;
 import com.example.orderservice.enums.OrderStatus;
 import com.example.orderservice.enums.PaymentMethod;
 import com.example.orderservice.service.OrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
 
 /**
  * @Create 08/2024
@@ -30,11 +32,15 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
+
+    private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
+
     //    @PreAuthorize("hasRole('ADMIN')")
     @ApiOperation(value = "Create Order REST API")
     @PostMapping
     public ResponseEntity<?> createOrder(@RequestBody OrderDto orderDetails) {
         OrderDto orderDto = orderService.createOrder(orderDetails);
+
         return ResponseEntity.ok(orderDto);
     }
 
@@ -54,14 +60,6 @@ public class OrderController {
         return ResponseEntity.ok(orderDtos.get());
     }
 
-
-//    @ApiOperation(value = "Update Order REST API")
-//    @PutMapping("/{id}")
-//    public ResponseEntity<?> updateOrder(@PathVariable String id, @RequestBody OrderDto orderDetails) {
-//        UUID uuid = UUID.fromString(id);
-//        Optional<OrderDto> orderDto = orderService.getOrderById(uuid);
-//        return ResponseEntity.ok(orderDto);
-//    }
 
     @ApiOperation(value = "Cancel Order REST API")
     @DeleteMapping("/{id}")

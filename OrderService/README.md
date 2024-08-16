@@ -17,6 +17,50 @@ cassandra -f
 cqlsh
 ```
 
+### Database Scripts
+#### Create orders
+```json
+{
+  "userId": "8b5c2c74-f3e7-4a68-b32b-8e4c76c3d052",
+  "shippingAddress": "123 Main St, Springfield, IL",
+  "billingAddress": "456 Elm St, Springfield, IL",
+  "paymentMethod": "Cash",
+  "orderItems": [
+    {
+      "itemId": "a9a9a9b1-bb1b-4c88-bb1b-3d8cbbd7e1f0",
+      "price": 55,
+      "quantity": 2
+    },
+    {
+      "itemId": "b8b8b8c1-cd1c-4d88-cd1c-4e9cbbd7e2f1",
+      "price": 20,
+      "quantity": 1
+    }
+  ]
+}
+```
+```json
+{
+  "userId": "8b5c2c74-f3e7-4a68-b32b-8e4c76c3d052",
+  "shippingAddress": "123 Main St, Springfield, IL",
+  "billingAddress": "456 Elm St, Springfield, IL",
+  "paymentMethod": "apple_pay",
+  "orderItems": [
+    {
+      "itemId": "a9a9a9b1-bb1b-4c88-bb1b-3d8cbbd7e1f0",
+      "price": 55,
+      "quantity": 6
+    },
+    {
+      "itemId": "b8b8b8c1-cd1c-4d88-cd1c-4e9cbbd7e2f1",
+      "price": 20,
+      "quantity": 3
+    }
+  ]
+}
+```
+
+
 #### can not add role
 https://stackoverflow.com/questions/24219953/cassandra-only-superuser-is-allowed-to-perform-create-user-queries
 go to file: usr/local/etc/cassandra/.yaml

@@ -1,8 +1,7 @@
 package com.example.orderservice.service.Impl;
 
-import com.example.itemservice.common.Response;
-import com.example.itemservice.dto.ItemDto;
 //import com.example.orderservice.client.itemserviceceClient;
+import com.example.orderservice.dto.PaymentRequest;
 import com.example.orderservice.entity.OrderItem;
 import com.example.orderservice.enums.PaymentMethod;
 import com.example.orderservice.exception.OrderNotFoundException;
@@ -16,12 +15,13 @@ import com.example.orderservice.mapper.OrderMapper;
 import com.example.orderservice.repository.OrderItemRepository;
 import com.example.orderservice.repository.OrderRepository;
 import com.example.orderservice.service.OrderService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.http.ResponseEntity;
-import org.springframework.kafka.core.KafkaTemplate;
+    import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -51,7 +51,7 @@ public class OrderServiceImpl implements OrderService {
     private OrderItemMapper orderItemMapper;
 
     @Autowired
-    private KafkaTemplate<String, Order> kafkaTemplate;
+    private KafkaTemplate<String, String> kafkaTemplate;
 
 //    @Autowired
 //    private ItemServiceClient itemServiceClient;
@@ -59,6 +59,7 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private ItemService itemService; // Inject ItemService
 
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     private static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
 
@@ -98,7 +99,21 @@ public class OrderServiceImpl implements OrderService {
         Order savedOrder = orderRepository.save(order);
 
         // Publish order creation event to Kafka
-//        kafkaTemplate.send("order-topic", savedOrder);
+        logger.info("order service send created to Payment service to pay!");
+
+        // send create order finish to payment service to make a payment
+        PaymentRequest<?> request = new PaymentRequest<>(savedOrder.getId(), savedOrder.getTotalPrice(),
+            savedOrder.getPaymentMethod(), "Please do payment for the order~");
+        try {
+
+            String orderJson = objectMapper.writeValueAsString(request);
+            kafkaTemplate.send("payment-request-topic", orderJson);
+
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            // Handle exception
+        }
+        logger.info("payment request is: " + request.toString());
 
         return orderMapper.toOrderDto(savedOrder, orderItems);
     }

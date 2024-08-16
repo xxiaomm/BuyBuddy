@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BuyBuddy.iml" filepath="$PROJECT_DIR$/BuyBuddy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kafka-server/src/main/main.iml" filepath="$PROJECT_DIR$/kafka-server/src/main/main.iml" />
     </modules>
   </component>
 </project>
