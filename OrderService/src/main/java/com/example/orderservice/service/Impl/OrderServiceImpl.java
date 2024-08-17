@@ -2,6 +2,7 @@ package com.example.orderservice.service.Impl;
 
 //import com.example.orderservice.client.itemserviceceClient;
 import com.example.orderservice.dto.PaymentRequest;
+import com.example.orderservice.dto.RefundRequest;
 import com.example.orderservice.entity.OrderItem;
 import com.example.orderservice.enums.PaymentMethod;
 import com.example.orderservice.exception.OrderNotFoundException;
@@ -102,7 +103,7 @@ public class OrderServiceImpl implements OrderService {
         logger.info("order service send created to Payment service to pay!");
 
         // send create order finish to payment service to make a payment
-        PaymentRequest<?> request = new PaymentRequest<>(savedOrder.getId(), savedOrder.getTotalPrice(),
+        PaymentRequest request = new PaymentRequest(savedOrder.getId(), savedOrder.getTotalPrice(),
             savedOrder.getPaymentMethod(), "Please do payment for the order~");
         try {
 
@@ -117,6 +118,35 @@ public class OrderServiceImpl implements OrderService {
 
         return orderMapper.toOrderDto(savedOrder, orderItems);
     }
+
+    @Override
+    public Optional<OrderDto> refundOrder(UUID orderId) {
+        try {
+            Optional<Order> orderOptional = orderRepository.findById(orderId);
+            if (orderOptional.isPresent()) {
+                Order order = orderOptional.get();
+                order.setOrderItems(orderItemRepository.findByIdOrderId(orderId));
+                RefundRequest request = new RefundRequest(orderId, order.getTotalPrice(),
+                    order.getPaymentMethod(),  "Please make a refund of the order! ");
+
+                String orderJson = objectMapper.writeValueAsString(request);
+                kafkaTemplate.send("refund-request-topic", orderJson);
+
+                return Optional.of(orderMapper.toOrderDto(order));
+            } else {
+                // Throw custom exception if the order is not found
+                throw new OrderNotFoundException("Order with ID " + orderId + " not found");
+            }
+        } catch (OrderNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return Optional.empty();
+
+    }
+
 
     @Override
     public Optional<OrderDto> getOrderById(UUID orderId) {
@@ -255,29 +285,6 @@ public class OrderServiceImpl implements OrderService {
         return Optional.empty();
     }
 
-//    @Override
-//    public Optional<OrderDto> updateOrder(UUID orderId, OrderDto orderDto) {
-//        Optional<Order> orderOptional = orderRepository.findById(orderId);
-//        if (orderOptional.isPresent()) {
-//            Order order = orderOptional.get();
-//            order.setUpdateTime(Instant.now());
-//            order.setOrderStatus(orderDto.getOrderStatus());
-//            order.setPaymentMethod(orderDto.getPaymentMethod());
-//            order.setShippingAddress(orderDto.getShippingAddress());
-//            order.setBillingAddress(orderDto.getBillingAddress());
-//
-//            double totalPrice = calculateTotalPrice(orderDto.getItems());
-//            order.setTotalPrice(totalPrice);
-//
-//            Order updatedOrder = orderRepository.save(order);
-//
-//            // Publish order update event to Kafka
-////            kafkaTemplate.send("order-update-topic", updatedOrder);
-//
-//            return Optional.of(orderMapper.toOrderDto(updatedOrder));
-//        }
-//        return Optional.empty();
-//    }
 
     @Override
     public Optional<OrderDto> cancelOrder(UUID orderId) {
@@ -287,13 +294,13 @@ public class OrderServiceImpl implements OrderService {
                 Order order = orderOptional.get();
                 order.setUpdateTime(Instant.now());
                 order.setOrderStatus(OrderStatus.CANCELLED);
-
-                orderRepository.delete(order);
-
-                List<OrderItem> orderItemList = orderItemRepository.findByIdOrderId(orderId);
-                order.setOrderItems(orderItemList);
-
-                orderItemRepository.deleteByIdOrderId(orderId);
+                order.setOrderItems(orderItemRepository.findByIdOrderId(orderId));
+//                orderRepository.delete(order);
+//
+//                List<OrderItem> orderItemList = orderItemRepository.findByIdOrderId(orderId);
+//                order.setOrderItems(orderItemList);
+//
+//                orderItemRepository.deleteByIdOrderId(orderId);
 
                 // Publish order cancellation event to Kafka
 //            kafkaTemplate.send("order-cancel-topic", canceledOrder);
@@ -328,7 +335,7 @@ public class OrderServiceImpl implements OrderService {
 
                 logger.info("Find order by id successfully! +size: "+ orderItemDtos.size() +"items: "+orderItemDtos.toString());
 
-                return Optional.empty();
+                return Optional.of(orderItemDtos);
             } else {
                 // Throw custom exception if the order is not found
                 throw new OrderNotFoundException("Order with ID " + orderId + " not found");

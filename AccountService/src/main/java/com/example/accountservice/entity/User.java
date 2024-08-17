@@ -23,7 +23,9 @@ import java.util.UUID;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    private Long id;
+//    @GeneratedValue(strategy = GenerationType.AUTO) // Auto generation strategy
+//    @Column(name = "id", updatable = false, nullable = false)
 
     @Column(name= "username", unique = true, nullable = false)
     private String username;
@@ -33,6 +35,7 @@ public class User {
 
     @Column(name= "password", nullable = false)
     private String password;
+
 //    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @Column(name= "shipping_address")
     private String shippingAddress;

@@ -21,7 +21,9 @@ import java.util.UUID;
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    private Long id;
+//    @GeneratedValue(strategy = GenerationType.AUTO) // Auto generation strategy
+//    @Column(name = "id", updatable = false, nullable = false)
 
     @Column(length = 60)
     private String name;

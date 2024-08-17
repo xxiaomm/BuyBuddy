@@ -15,13 +15,11 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PaymentRequest {
-    UUID orderId;
-    double totalPrice;
-
-    PaymentMethod paymentMethod;
+public class RefundResponse {
+//    private UUID refundId;
+    boolean isRefunded;
+    private UUID orderId;
+    private double totalPrice;
+    String paymentStatus;
     private String message;
-
-
-
 }

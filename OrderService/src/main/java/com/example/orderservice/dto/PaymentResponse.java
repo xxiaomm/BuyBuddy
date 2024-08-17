@@ -17,8 +17,9 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PaymentResponse {
-    private boolean success;
+    private boolean isPaid;
     private UUID orderId;
+    double totalPrice;
 //    private UUID paymentId;
     private String paymentStatus;
     private String message;

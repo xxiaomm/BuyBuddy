@@ -12,16 +12,13 @@ import java.util.UUID;
  * @Author xiao
  * @Description
  */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PaymentRequest {
+public class RefundRequest {
     UUID orderId;
     double totalPrice;
-
     PaymentMethod paymentMethod;
     private String message;
-
-
-
 }

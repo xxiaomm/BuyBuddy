@@ -2,6 +2,7 @@ package com.example.orderservice.service;
 
 import com.example.orderservice.dto.OrderDto;
 import com.example.orderservice.dto.PaymentResponse;
+import com.example.orderservice.dto.RefundResponse;
 import com.example.orderservice.enums.OrderStatus;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,34 +33,43 @@ public class ConsumerService {
     private final Logger logger= LoggerFactory.getLogger(ConsumerService.class);
 
 
-    @KafkaListener(topics = "payment-response-topic", groupId = "updateOrderStatus")
-    public String updateKafkaOrderStatus(String message) {
+    @KafkaListener(topics = "payment-response-topic", groupId = "paid")
+    public String updatePaidStatus(String message) {
         PaymentResponse response = null;
         try {
             response = objectMapper.readValue(message, PaymentResponse.class);
-            logger.info("kafka: start update order paid status..");
+            if (! response.isPaid()) return "Paid Failed! ";
+            logger.info("kafka: start update order status as paid..");
             UUID uuid = response.getOrderId();
-            String status = response.getPaymentStatus().toUpperCase();
-            switch(status) {
-                case "PAID":
-                    orderService.updateOrderStatus(uuid, OrderStatus.PAID);
-                    break;
-                case "REFUNDED":
-                    orderService.updateOrderStatus(uuid, OrderStatus.CANCELLED);
-                    break;
-                case "FAILED":
-                    return "Failed payment。。。。";
-
-            }
+            orderService.updateOrderStatus(uuid, OrderStatus.PAID);
+            logger.info("kafka: finish update order status as paid..");
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-
-
         return "kafka: consumer service has updated order status as paid! ";
+    }
+
+    @KafkaListener(topics = "refund-response-topic", groupId = "refund")
+    public String updateRefundStatus(String message) {
+        RefundResponse response = null;
+        try {
+            response = objectMapper.readValue(message, RefundResponse.class);
+            if (! response.isRefunded()) return "Refund Failed! ";
+            logger.info("kafka: start update order status as refunded..");
+            UUID uuid = response.getOrderId();
+            orderService.updateOrderStatus(uuid, OrderStatus.REFUNDED);
+
+
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "kafka: consumer service has updated order status as refunded! ";
     }
 
 }

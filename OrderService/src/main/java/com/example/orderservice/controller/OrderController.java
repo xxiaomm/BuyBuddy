@@ -2,6 +2,7 @@ package com.example.orderservice.controller;
 
 import com.example.orderservice.dto.OrderDto;
 import com.example.orderservice.dto.OrderItemDto;
+import com.example.orderservice.dto.RefundRequest;
 import com.example.orderservice.enums.OrderStatus;
 import com.example.orderservice.enums.PaymentMethod;
 import com.example.orderservice.service.OrderService;
@@ -43,6 +44,16 @@ public class OrderController {
 
         return ResponseEntity.ok(orderDto);
     }
+
+    @ApiOperation(value = "Refund Order REST API")
+    @PutMapping("/refunds/{id}")
+    public ResponseEntity<?> refundOrder(@PathVariable String id) {
+        UUID uuid = UUID.fromString(id);
+        Optional<OrderDto> orderDto = orderService.refundOrder(uuid);
+
+        return orderDto.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
 
     @ApiOperation(value = "Get Order By Id REST API")
     @GetMapping("/{id}")
