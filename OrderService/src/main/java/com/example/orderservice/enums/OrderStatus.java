@@ -11,5 +11,6 @@ public enum OrderStatus {
     PAID,
     COMPLETED,
     CANCELLED,
+    REFUNDED,
     UNKNOWN
 }

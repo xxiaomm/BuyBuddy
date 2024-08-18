@@ -4,9 +4,9 @@ select * from Users;
 select * from Roles;
 select * from User_Roles;
 
+DROP TABLE IF EXISTS User_Roles;
 DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Roles;
-DROP TABLE IF EXISTS User_Roles;
 
 create table Users(
   id BIGINT AUTO_INCREMENT Primary key,

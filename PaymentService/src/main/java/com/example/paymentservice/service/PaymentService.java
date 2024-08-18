@@ -13,11 +13,8 @@ import java.util.Optional;
 
 @Service
 public interface PaymentService {
-    Payment submitPayment(Payment payment);
-    Optional<Payment> updatePayment(String orderId, Payment payment);
 
-//    Long doPayment(String orderId); // paymentId
+//    Optional<Payment> updatePayment(String orderId, Payment payment);
 
-    Optional<Payment> reversePayment(String orderId);
     Optional<Payment> searchPayment(String orderId);
 }

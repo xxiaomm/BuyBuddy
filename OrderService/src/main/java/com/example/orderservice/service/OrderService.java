@@ -22,6 +22,7 @@ import java.util.UUID;
 public interface OrderService {
     OrderDto createOrder(OrderDto orderDto);
 //    Optional<OrderDto> updateOrder(UUID orderId, OrderDto orderDto);
+    Optional<OrderDto> refundOrder(UUID orderId);
 
     Optional<OrderDto> updateOrderStatus(UUID orderId, OrderStatus orderStatus);
     Optional<OrderDto> updatePaymentMethod(UUID orderId, PaymentMethod paymentMethod);
