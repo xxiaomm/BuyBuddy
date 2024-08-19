@@ -10,12 +10,17 @@
         <option value="$PROJECT_DIR$/PaymentService/pom.xml" />
         <option value="$PROJECT_DIR$/Eureka/pom.xml" />
         <option value="$PROJECT_DIR$/kafka-server/pom.xml" />
+        <option value="$PROJECT_DIR$/shipping-service/pom.xml" />
+        <option value="$PROJECT_DIR$/cart-service/pom.xml" />
+        <option value="$PROJECT_DIR$/item-service/pom.xml" />
+        <option value="$PROJECT_DIR$/payment-sesrvice/pom.xml" />
+        <option value="$PROJECT_DIR$/payment-service/pom.xml" />
+        <option value="$PROJECT_DIR$/eureka-server/pom.xml" />
+        <option value="$PROJECT_DIR$/account-service/pom.xml" />
+        <option value="$PROJECT_DIR$/order-service/pom.xml" />
+        <option value="$PROJECT_DIR$/account-service/notification-service/pom.xml" />
+        <option value="$PROJECT_DIR$/notification-service/pom.xml" />
       </list>
-    </option>
-    <option name="ignoredFiles">
-      <set>
-        <option value="$PROJECT_DIR$/kafka-server/pom.xml" />
-      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_19" default="true" project-jdk-name="15" project-jdk-type="JavaSDK">
